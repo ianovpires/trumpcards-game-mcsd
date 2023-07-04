@@ -1,25 +1,44 @@
 window.addEventListener('load', async () => {
-    if (typeof web3 !== 'undefined') {
-        web3 = new Web3(web3.currentProvider);
-    } else {
-        // Set your own provider URL for the Polygon network
-        web3 = new Web3(new Web3.providers.HttpProvider('https://polygon-rpc-url'));
+    let web3;
+    let contract;
+    let playerAddress;
+    
+    async function init() {
+        if (typeof window.ethereum !== 'undefined') {
+            web3 = new Web3(window.ethereum);
+            await window.ethereum.enable();
+        } else if (typeof window.web3 !== 'undefined') {
+            web3 = new Web3(window.web3.currentProvider);
+        } else {
+            // Set your own provider URL for the Polygon network
+            web3 = new Web3(new Web3.providers.HttpProvider('https://polygon-rpc-url'));
+        }
+        
+        // Set the contract address and ABI
+        const contractAddress = 'CONTRACT_ADDRESS';
+        const contractAbi = CONTRACT_ABI;
+        
+        // Create an instance of the contract
+        contract = new web3.eth.Contract(contractAbi, contractAddress);
+        
+        // Use the contract methods
+        const accounts = await web3.eth.getAccounts();
+        playerAddress = accounts[0];
     }
-    
-    // Set the contract address and abi
-    const contractAddress = 'CONTRACT_ADDRESS';
-    const contractAbi = CONTRACT_ABI;
-    
-    // Create an instance of the contract
-    const contract = new web3.eth.Contract(contractAbi, contractAddress);
-    
-    // Use the contract methods
-    const accounts = await web3.eth.requestAccounts();
-    const playerAddress = accounts[0];
     
     function displayOutput(message) {
         const outputElement = document.getElementById('output');
         outputElement.innerHTML = message;
+    }
+    
+    async function login() {
+        try {
+            await init();
+            displayOutput('Logged in with MetaMask!');
+        } catch (error) {
+            console.error(error);
+            displayOutput('Error logging in with MetaMask.');
+        }
     }
     
     async function registerPlayerCard() {
