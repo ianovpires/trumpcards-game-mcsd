@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Football Game</title>
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
-    <script src="app.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Football NFT Game</title>
 </head>
 <body>
-    <h1>Football Game</h1>
-    <div id="output"></div>
-    <button onclick="login()">Login with MetaMask</button>
-    <button onclick="registerPlayerCard()">Register Player Card</button>
-    <button onclick="selectPlayerCard()">Select Player Card</button>
+  <h1>Football NFT Game</h1>
+  <div id="login">
+    <h2>Login</h2>
+    <button onclick="login()">Connect with Metamask</button>
+  </div>
+  <div id="game" style="display: none;">
+    <h2>Select Player Card</h2>
+    <select id="playerCardSelect"></select>
+    <button onclick="selectPlayerCard()">Select</button>
+    <h2>Battle</h2>
+    <select id="opponentCardSelect"></select>
     <button onclick="battle()">Battle</button>
+    <h2>Player Score</h2>
+    <div id="playerScore"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
