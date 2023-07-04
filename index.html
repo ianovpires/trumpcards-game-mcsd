@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jogo de NFTs de Jogadores de Futebol</title>
+    <meta charset="UTF-8">
+    <title>MetaMask Integration</title>
 </head>
 <body>
-  <h1>Jogo de NFTs de Jogadores de Futebol</h1>
+    <h1>MetaMask Integration</h1>
+    <button id="loginButton">Login with MetaMask</button>
+    <button id="registerButton">Register Player Card</button>
+    <button id="selectButton">Select Player Card</button>
+    <button id="battleButton">Battle</button>
+    <div id="output"></div>
 
-  <button onclick="login()">Conectar com a MetaMask</button>
-  <div id="loginStatus"></div>
-
-  <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
 
