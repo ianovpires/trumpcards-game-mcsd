@@ -1,28 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Football NFT Game</title>
+  <title>Jogo de NFTs de Jogadores de Futebol</title>
 </head>
 <body>
-  <h1>Football NFT Game</h1>
-  <div id="login">
-    <h2>Login</h2>
-    <button onclick="login()">Connect with Metamask</button>
-  </div>
-  <div id="game" style="display: none;">
-    <h2>Select Player Card</h2>
-    <select id="playerCardSelect"></select>
-    <button onclick="selectPlayerCard()">Select</button>
-    <h2>Battle</h2>
-    <select id="opponentCardSelect"></select>
-    <button onclick="battle()">Battle</button>
-    <h2>Player Score</h2>
-    <div id="playerScore"></div>
-  </div>
+  <h1>Jogo de NFTs de Jogadores de Futebol</h1>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
-  <script src="./app.js"></script>
+  <button onclick="login()">Conectar com a MetaMask</button>
+  <div id="loginStatus"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>
+
