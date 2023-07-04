@@ -83,4 +83,10 @@ window.addEventListener('load', async () => {
             displayOutput('Error executing battle.');
         }
     }
+
+    document.getElementById('loginButton').addEventListener('click', login);
+    document.getElementById('registerButton').addEventListener('click', registerPlayerCard);
+    document.getElementById('selectButton').addEventListener('click', selectPlayerCard);
+    document.getElementById('battleButton').addEventListener('click', battle);
 });
+
