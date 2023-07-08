@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>MetaMask Integration</title>
+    <title>NFT Battle</title>
+    <style>
+        /* Estilos CSS */
+    </style>
 </head>
 <body>
-    <h1>MetaMask Integration</h1>
-    <button id="loginButton">Login with MetaMask</button>
-    <button id="registerButton">Register Player Card</button>
-    <button id="selectButton">Select Player Card</button>
-    <button id="battleButton">Battle</button>
-    <div id="output"></div>
+    <h1>NFT Battle</h1>
 
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <div id="login">
+        <h2>Login</h2>
+        <form id="loginForm" action="login.php" method="POST">
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <input type="password" name="password" id="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <div id="game" style="display: none;">
+        <h2>Selecione suas cartas para a batalha</h2>
+        <div id="playerCards"></div>
+        <h2>Selecione a carta do oponente</h2>
+        <div id="opponentCards"></div>
+        <button onclick="startBattle()">Iniciar Batalha</button>
+        <div id="battleResult"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
+
+    
 
