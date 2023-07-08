@@ -12,6 +12,7 @@ contract FootballBattle {
         uint256 defense;
         uint256 dribble;
         uint256 strength;
+        bool inBattle;
     }
 
     mapping(uint256 => Card) public cards;
@@ -38,7 +39,8 @@ contract FootballBattle {
             attack: attack,
             defense: defense,
             dribble: dribble,
-            strength: strength
+            strength: strength,
+            inBattle: false
         });
 
         cards[cardId] = newCard;
@@ -47,31 +49,43 @@ contract FootballBattle {
     function startBattle(uint256 card1Id, uint256 card2Id) external {
         require(cards[card1Id].attack > 0, "Card 1 does not exist");
         require(cards[card2Id].attack > 0, "Card 2 does not exist");
+        require(!cards[card1Id].inBattle, "Card 1 is already in battle");
+        require(!cards[card2Id].inBattle, "Card 2 is already in battle");
+
+        cards[card1Id].inBattle = true;
+        cards[card2Id].inBattle = true;
 
         uint256 card1Score = calculateScore(cards[card1Id]);
         uint256 card2Score = calculateScore(cards[card2Id]);
 
         if (card1Score > card2Score) {
             emit Battle(card1Id, card2Id, card1Id);
-            transferCard(msg.sender, card2Id, card1Id);
+            transferCard(card2Id, msg.sender, card1Id);
         } else if (card2Score > card1Score) {
             emit Battle(card1Id, card2Id, card2Id);
-            transferCard(msg.sender, card1Id, card2Id);
+            transferCard(card1Id, msg.sender, card2Id);
         } else {
             revert("It's a draw!");
         }
-    }
 
-    function transferCard(address recipient, uint256 fromCardId, uint256 toCardId) internal {
-        require(balances[msg.sender][fromCardId] > 0, "Sender does not own the card");
-        require(cards[fromCardId].attack > 0, "Card does not exist");
-
-        balances[msg.sender][fromCardId] = balances[msg.sender][fromCardId].sub(1);
-        balances[recipient][toCardId] = balances[recipient][toCardId].add(1);
+        cards[card1Id].inBattle = false;
+        cards[card2Id].inBattle = false;
     }
 
     function calculateScore(Card memory card) internal pure returns (uint256) {
         return card.attack.add(card.defense).add(card.dribble).add(card.strength);
+    }
+
+    function transferCard(
+        uint256 cardId,
+        address winner,
+        uint256 loserCardId
+    ) internal {
+        // Implemente a lógica de transferência da carta usando o contrato ERC1155 ou o padrão adequado
+
+        // Exemplo simplificado:
+        balances[winner][cardId] += 1;
+        balances[msg.sender][loserCardId] -= 1;
     }
 }
 
